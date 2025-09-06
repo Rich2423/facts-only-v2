@@ -1,0 +1,13 @@
+{
+  "name": "facts-only",
+  "version": "1.0.0",
+  "description": "Facts Only - Teen Mental Health Support App",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -s .",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": ["mental health", "teens", "confidence", "support"],
+  "author": "Facts Only Team",
+  "license": "MIT"
+}

@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facts Only - No Cap, Just Growth 💯</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .app-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .login-screen {
+            padding: 40px 20px;
+            text-align: center;
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .navigation {
+            display: flex;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            z-index: 100;
+        }
+
+        .help-banner {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            background: #dc3545;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            z-index: 101;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .help-banner:hover {
+            background: #c82333;
+        }
+
+        .nav-item {
+            flex: 1;
+            padding: 12px 8px;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 11px;
+        }
+
+        .nav-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-item:hover {
+            background: #e9ecef;
+        }
+
+        .nav-item.active:hover {
+            background: #667eea;
+        }
+
+        .screen {
+            padding: 20px;
+            padding-bottom: 140px;
+            min-height: calc(100vh - 180px);
+            display: none !important;
+        }
+
+        .screen.active {
+            display: block !important;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #f0f0f0;
+        }
+
+        .fact-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .fact-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .fact-content {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .fact-category {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mood-check {
+            text-align: center;
+        }
+
+        .mood-scale {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .mood-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .mood-button:hover {
+            border-color: #667eea;
+            transform: scale(1.1);
+        }
+
+        .mood-button.selected {
+            background: #667eea;
+            border-color: #667eea;
+            transform: scale(1.2);
+        }
+
+        .practice-scenario {
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        .scenario-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .scenario-context {
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .response-options {
+            list-style: none;
+        }
+
+        .response-option {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .response-option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        .response-option.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .response-option.correct {
+            background: #28a745;
+            color: white;
+        }
+
+        .response-option.incorrect {
+            background: #dc3545;
+            color: white;
+        }
+
+        .chat-container {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+        }
+
+        .chat-message.ai {
+            text-align: left;
+        }
+
+        .chat-message.user {
+            text-align: right;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message-bubble.ai {
+            background: #f1f3f4;
+            color: #333;
+        }
+
+        .message-bubble.user {
+            background: #667eea;
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .chat-input button {
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .achievement-badge {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #28a745;
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 5px;
+        }
+
+        .achievement-badge.locked {
+            background: #6c757d;
+        }
+
+        .achievement-badge.supporter {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .personality-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .personality-card {
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .personality-card:hover {
+            border-color: #667eea;
+        }
+
+        .personality-card.active {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .onboarding {
+            text-align: center;
+            padding: 40px 20px;
+            display: block;
+        }
+
+        .onboarding h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .onboarding p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .emergency-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .user-info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #667eea;
+            z-index: 1000;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 350px;
+            margin: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .supporters-list {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #ffc107;
+        }
+
+        .supporter-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #ffe69c;
+        }
+
+        .supporter-item:last-child {
+            border-bottom: none;
+        }
+
+        .donation-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .donation-form h4 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .donation-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">Facts Only</div>
+            <div class="tagline">No Cap, Just Growth 💯</div>
+        </div>
+
+        <!-- User Info (shown when logged in) -->
+        <div id="userInfo" class="user-info" style="display: none;">
+            Welcome, <span id="currentUsername"></span>!
+        </div>
+
+        <!-- Logout Button (shown when logged in) -->
+        <button id="logoutBtn" class="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+
+        <!-- Emergency Help Button -->
+        <button class="emergency-button" onclick="showEmergencyHelp()">🆘</button>
+
+        <!-- Login/Register Screen -->
+        <div id="authScreen" class="login-screen">
+            <div class="auth-form">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showAuthTab('login')">Login</button>
+                    <button class="auth-tab" onclick="showAuthTab('register')">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">Username</label>
+                        <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button class="btn" onclick="login()">Login to Facts Only</button>
+                    <div id="loginError" style="color: #dc3545; margin-top: 10px; font-size: 14px; display: none;"></div>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="registerUsername">Choose Username</label>
+                        <input type="text" id="registerUsername" placeholder="Pick a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Create Password</label>
+                        <input type="password" id="registerPassword" placeholder="Create a strong password" required>
+                        <div class="password-requirements">
+                            Password must be at least 8 characters long and include letters and numbers for your safety.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Re-enter your password" required>
+                    </div>
+                    <button class="btn" onclick="register()">Create Account</button>
+                    <div id="registerError" style="color: #dc3545; margin-top: 10px; font-size: 14px; display: none;"></div>
+                </div>
+            </div>
+
+            <div style="text-align: center; color: #666; font-size: 14px;">
+                <p>🔒 Your data stays private and secure on your device</p>
+                <p>💝 Creating an account helps us track your support and recognize donors</p>
+            </div>
+        </div>
+
+        <!-- Onboarding Screen -->
+        <div id="onboarding" class="screen onboarding">
+            <h2>Welcome to Facts Only!</h2>
+            <p>Ready to build real confidence and communication skills? No fake positivity here - just authentic support that actually helps.</p>
+            <p>✨ Get daily facts that boost your confidence<br>
+            💬 Practice real conversations in The Corner<br>
+            📈 Track your growth and celebrate wins</p>
+            <button class="btn" onclick="completeOnboarding()">Let's Get Started</button>
+        </div>
+
+        <!-- Facts Screen -->
+        <div id="facts" class="screen">
+            <div class="card fact-card">
+                <div class="fact-title">Today's Fact</div>
+                <div class="fact-content" id="dailyFact">Your worth isn't determined by other people's opinions. You're valuable because you exist, not because of what you achieve.</div>
+                <div class="fact-category">Self-Worth</div>
+            </div>
+
+            <div class="card mood-check">
+                <h3>How are you feeling today?</h3>
+                <div class="mood-scale">
+                    <button class="mood-button" onclick="selectMoodEmoji('😭', 'terrible')" title="Terrible">😭</button>
+                    <button class="mood-button" onclick="selectMoodEmoji('😢', 'very sad')" title="Very Sad">😢</button>
+                    <button class="mood-button" onclick="selectMoodEmoji('😞', 'sad')" title="Sad">😞</button>
+                    <button class="mood-button" onclick="selectMoodEmoji('😐', 'okay')" title="Okay">😐</button>
+                    <button class="mood-button" onclick="selectMoodEmoji('🙂', 'good')" title="Good">🙂</button>
+                    <button class="mood-button" onclick="selectMoodEmoji('😊', 'happy')" title="Happy">😊</button>
+                    <button class="mood-button" onclick="selectMoodEmoji('😄', 'very happy')" title="Very Happy">😄</button>
+                    <button class="mood-button" onclick="selectMoodEmoji('🤩', 'amazing')" title="Amazing">🤩</button>
+                </div>
+                <p><small>Tap an emoji to show how you're feeling</small></p>
+                <button class="btn" onclick="getNewFact()" style="margin-top: 20px;">Get Another Fact</button>
+            </div>
+
+            <!-- Journal Entry Card -->
+            <div class="card">
+                <h3>📝 Daily Journal</h3>
+                <p style="color: #666; margin-bottom: 15px; font-size: 14px;">Write about your day, your thoughts, or anything on your mind. This stays private on your device.</p>
+                <textarea id="journalEntry" placeholder="How was your day? What's on your mind? What are you grateful for?" 
+                    style="width: 100%; min-height: 120px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; resize: vertical; font-family: inherit; font-size: 14px;"></textarea>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="btn" onclick="saveJournalEntry()" style="flex: 1;">Save Entry</button>
+                    <button class="btn" onclick="viewJournalHistory()" style="flex: 1; background: #6c757d;">View Past Entries</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Screen -->
+        <div id="practice" class="screen">
+            <div class="card practice-scenario">
+                <div class="scenario-title">Practice Scenario: Asking Someone Out</div>
+                <div class="scenario-context">You want to ask your crush to hang out this weekend. You're texting them now.</div>
+                
+                <p><strong>Your message should be:</strong></p>
+                <ul class="response-options">
+                    <li class="response-option" onclick="selectResponse(this, false, 0)">hey... um... maybe we could hang out? if you want... no pressure though...</li>
+                    <li class="response-option" onclick="selectResponse(this, true, 1)">Hey! Want to grab some food or see a movie this weekend?</li>
+                    <li class="response-option" onclick="selectResponse(this, false, 2)">WE SHOULD DEFINITELY HANG OUT THIS WEEKEND IT WOULD BE SO AMAZING</li>
+                </ul>
+                
+                <div id="feedback" style="margin-top: 15px; padding: 15px; border-radius: 8px; display: none;"></div>
+                <button class="btn" onclick="nextScenario()">Next Scenario</button>
+            </div>
+
+            <div class="card">
+                <h3>Your Practice Progress</h3>
+                <div class="progress-item">
+                    <span>Texting Confidence</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <span>Family Conversations</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <span>Social Situations</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Corner (Chat) Screen -->
+        <div id="corner" class="screen">
+            <div class="personality-selector">
+                <div class="personality-card active" onclick="selectPersonality('homie', 0)">
+                    <div style="font-size: 24px;">😎</div>
+                    <div><strong>Homie</strong></div>
+                    <div><small>Your bestie who gets it</small></div>
+                </div>
+                <div class="personality-card" onclick="selectPersonality('bigbro', 1)">
+                    <div style="font-size: 24px;">💪</div>
+                    <div><strong>Big Bro</strong></div>
+                    <div><small>Protective and encouraging</small></div>
+                </div>
+                <div class="personality-card" onclick="selectPersonality('unk', 2)">
+                    <div style="font-size: 24px;">🤓</div>
+                    <div><strong>Unk</strong></div>
+                    <div><small>Wise uncle energy</small></div>
+                </div>
+                <div class="personality-card" onclick="selectPersonality('og', 3)">
+                    <div style="font-size: 24px;">👑</div>
+                    <div><strong>OG</strong></div>
+                    <div><small>Been there, done that</small></div>
+                </div>
+            </div>
+
+            <div class="chat-container" id="chatContainer">
+                <div class="chat-message ai">
+                    <div class="message-bubble ai">
+                        Yo! What's good? I'm Homie, your digital bestie. What's on your mind today? 😎
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <!-- Progress Screen -->
+        <div id="progress" class="screen">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="streakStat">7</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="scenariosStat">24</div>
+                    <div class="stat-label">Scenarios Done</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="xpStat">156</div>
+                    <div class="stat-label">Total XP</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="factsStat">12</div>
+                    <div class="stat-label">Facts Read</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Achievements</h3>
+                <div class="achievement-badge">First Steps 🚀</div>
+                <div class="achievement-badge">Conversation Starter 💬</div>
+                <div class="achievement-badge">Week One Warrior 📅</div>
+                <div class="achievement-badge locked">Facts Scholar 📚</div>
+                <div class="achievement-badge locked">Chat Champion 🏆</div>
+                <div class="achievement-badge locked">Growth Mindset 🌱</div>
+                <div id="supporterBadge" class="achievement-badge supporter" style="display: none;">Facts Only Supporter 💝</div>
+            </div>
+
+            <div class="card">
+                <h3>Confidence Level: Rising Star ⭐</h3>
+                <div class="progress-bar" style="width: 100%; height: 12px; margin: 15px 0;">
+                    <div class="progress-fill" style="width: 67%"></div>
+                </div>
+                <p><small>67% to Confidence Champion level!</small></p>
+            </div>
+
+            <button class="btn" onclick="exportProgress()">Export My Progress</button>
+        </div>
+
+        <!-- Donations Screen -->
+        <div id="donations" class="screen">
+            <div class="card">
+                <h2 style="text-align: center; margin-bottom: 20px; color: #667eea;">💝 Support Facts Only</h2>
+                
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🌟</div>
+                    <h3 style="color: #333; margin-bottom: 15px;">Keeping Real Support Free for All Teens</h3>
+                </div>
+
+                <div style="margin-bottom: 25px; line-height: 1.6;">
+                    <p style="margin-bottom: 15px;"><strong>Facts Only was created because we believe every teen deserves authentic mental health support - not corporate wellness speak or toxic positivity.</strong></p>
+                    
+                    <p style="margin-bottom: 15px;">Too many teens struggle with confidence, social anxiety, and communication skills but can't access helpful resources. Therapy is expensive, school counselors are overwhelmed, and most apps either treat teens like children or push them toward crisis services.</p>
+                    
+                    <p style="margin-bottom: 15px;">We built Facts Only to bridge that gap - providing genuine, evidence-based support wrapped in language teens actually connect with. Our AI personalities aren't trying to replace therapy; they're here to help with the everyday confidence and communication challenges that teens face.</p>
+                    
+                    <p style="margin-bottom: 15px;"><strong>Our Promise: Facts Only will always be free.</strong> We believe financial barriers shouldn't prevent teens from accessing mental health support.</p>
+                </div>
+
+                <!-- Supporters Recognition -->
+                <div id="supportersList" class="supporters-list" style="display: none;">
+                    <h4 style="color: #333; margin-bottom: 15px;">🌟 Amazing Supporters ($20+)</h4>
+                    <div id="supportersContent"></div>
+                </div>
+
+                <!-- Donation Form -->
+                <div class="donation-form">
+                    <h4>💝 Make a Donation</h4>
+                    <div class="form-group">
+                        <label for="donorName">Your Name (for recognition)</label>
+                        <input type="text" id="donorName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="donorEmail">Email (optional)</label>
+                        <input type="email" id="donorEmail" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="donationAmount">Donation Amount ($)</label>
+                        <input type="number" id="donationAmount" placeholder="Enter amount" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="donationMessage">Message (optional)</label>
+                        <input type="text" id="donationMessage" placeholder="Why do you support Facts Only?">
+                    </div>
+                    <button class="btn" onclick="processDonation()">Support Facts Only 💝</button>
+                </div>
+
+                <div class="card" style="background: #f8f9ff; border: 2px solid #667eea;">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">🎯 Where Your Donations Go:</h4>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Better AI responses</strong> - More nuanced, helpful conversations</li>
+                        <li><strong>More practice scenarios</strong> - Covering situations teens actually face</li>
+                        <li><strong>Enhanced privacy features</strong> - Keeping your data safe and local</li>
+                        <li><strong>Crisis prevention tools</strong> - Earlier support when you're struggling</li>
+                        <li><strong>Community features</strong> - Anonymous peer support options</li>
+                        <li><strong>Accessibility improvements</strong> - Making the app work for everyone</li>
+                    </ul>
+                </div>
+
+                <div style="background: #e9ecef; padding: 15px; border-radius: 8px; font-size: 12px; color: #666; text-align: center;">
+                    <p><strong>Transparency:</strong> Facts Only is run by a small team committed to teen mental health. 100% of donations go toward app development and keeping the service free. No corporate profits, no data selling, no hidden agendas - just real support for real teens.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-item" onclick="navigateToScreen('facts', 0)">📚<br>Facts</button>
+            <button class="nav-item" onclick="navigateToScreen('practice', 1)">🎯<br>Practice</button>
+            <button class="nav-item" onclick="navigateToScreen('corner', 2)">💭<br>Corner</button>
+            <button class="nav-item" onclick="navigateToScreen('progress', 3)">📊<br>Progress</button>
+            <button class="nav-item" onclick="navigateToScreen('donations', 4)">💝<br>Support</button>
+        </div>
+
+        <!-- Immediate Help Banner -->
+        <div class="help-banner" onclick="showImmediateHelp()">
+            🚨 Need Immediate Help? Tap Here
+        </div>
+
+        <!-- All Modal Windows -->
+        <div id="emergencyModal" class="modal">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeEmergencyHelp()">&times;</button>
+                <h3>🆘 Need Support Right Now?</h3>
+                <p>You're not alone. Here are resources that can help:</p>
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>Crisis Text Line:</strong> Text HOME to 741741</p>
+                    <p><strong>National Suicide Prevention Lifeline:</strong> 988</p>
+                    <p><strong>Teen Line:</strong> 800-852-8336</p>
+                </div>
+                <p><small>Facts Only is here to support you, but these professionals are trained to help in crisis situations.</small></p>
+                <button class="btn" onclick="closeEmergencyHelp()">I'm OK for now</button>
+            </div>
+        </div>
+
+        <div id="immediateHelpModal" class="modal">
+            <div class="modal-content" style="max-width: 450px;">
+                <button class="close-btn" onclick="closeImmediateHelp()">&times;</button>
+                <h3 style="color: #dc3545;">🚨 Immediate Help Resources</h3>
+                <p style="margin-bottom: 20px;"><strong>If you're in crisis or having thoughts of self-harm, please reach out immediately:</strong></p>
+                
+                <div style="background: #f8d7da; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left;">
+                    <h4 style="color: #721c24; margin-bottom: 10px;">🆘 Crisis Support (24/7)</h4>
+                    <p><strong>National Suicide Prevention Lifeline:</strong><br>
+                    <a href="tel:988" style="color: #dc3545; font-size: 18px; font-weight: bold;">📞 Call or Text 988</a></p>
+                    
+                    <p style="margin-top: 10px;"><strong>Crisis Text Line:</strong><br>
+                    <a href="sms:741741&body=HOME" style="color: #dc3545; font-weight: bold;">💬 Text HOME to 741741</a></p>
+                </div>
+
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left;">
+                    <h4 style="color: #856404; margin-bottom: 10px;">🤝 Teen-Specific Support</h4>
+                    <p><strong>Teen Line (6 PM - 10 PM PST):</strong><br>
+                    <a href="tel:8008528336" style="color: #856404; font-weight: bold;">📞 800-852-8336</a></p>
+                    
+                    <p style="margin-top: 10px;"><strong>LGBTQ+ Youth:</strong><br>
+                    <a href="tel:18664887386" style="color: #856404; font-weight: bold;">📞 TrevorLifeline: 1-866-488-7386</a></p>
+                    
+                    <p style="margin-top: 10px;"><strong>SAMHSA National Helpline:</strong><br>
+                    <a href="tel:18006624357" style="color: #856404; font-weight: bold;">📞 1-800-662-4357</a></p>
+                </div>
+
+                <div style="background: #d1ecf1; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left;">
+                    <h4 style="color: #0c5460; margin-bottom: 10px;">🏥 Emergency Services</h4>
+                    <p><strong>Immediate Danger:</strong><br>
+                    <a href="tel:911" style="color: #dc3545; font-size: 18px; font-weight: bold;">📞 Call 911</a></p>
+                    
+                    <p style="margin-top: 10px;"><strong>Find Local Crisis Centers:</strong><br>
+                    <a href="https://findtreatment.samhsa.gov/" target="_blank" style="color: #0c5460; font-weight: bold;">🔍 SAMHSA Treatment Locator</a></p>
+                </div>
+
+                <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Remember: Reaching out for help is a sign of strength, not weakness. These professionals are trained to help and want to support you.</p>
+                
+                <button class="btn" onclick="closeImmediateHelp()" style="background: #28a745;">I Have The Numbers I Need</button>
+            </div>
+        </div>
+
+        <div id="journalHistoryModal" class="modal">
+            <div class="modal-content" style="max-width: 450px; max-height: 80vh; overflow-y: auto;">
+                <button class="close-btn" onclick="closeJournalHistory()">&times;</button>
+                <h3>📖 Your Journal Entries</h3>
+                <div id="journalHistoryContent">
+                    <p style="color: #666; text-align: center; margin: 40px 0;">No journal entries yet. Start writing to see your entries here!</p>
+                </div>
+                <button class="btn" onclick="closeJournalHistory()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log("Facts Only app starting...");
+        
+        // Global state
+        let currentScreen = 'authScreen';
+        let selectedMood = null;
+        let currentPersonality = 'homie';
+        let currentScenarioIndex = 0;
+        let currentUser = null;
+        let userProgress = {
+            streak: 7,
+            scenariosCompleted: 24,
+            totalXP: 156,
+            factsRead: 12,
+            confidenceLevel: 67
+        };
+
+        // Authentication Database (in production, this would be server-side)
+        const userDatabase = JSON.parse(localStorage.getItem('factsonly_users') || '{}');
+        const donationsDatabase = JSON.parse(localStorage.getItem('factsonly_donations') || '[]');
+
+        // Facts database
+        const facts = {
+            selfWorth: [
+                "Your worth isn't determined by other people's opinions. You're valuable because you exist, not because of what you achieve.",
+                "Confidence isn't about being perfect. It's about being comfortable with who you are, flaws and all.",
+                "You don't need everyone to like you. The right people will appreciate your authentic self.",
+                "Your value doesn't decrease based on someone's inability to see your worth.",
+                "Self-respect is your first step to getting respect from others."
+            ],
+            social: [
+                "Most people are too worried about themselves to judge you as much as you think.",
+                "Awkward moments happen to everyone. They're not character flaws, they're human moments.",
+                "Good friends want to see you succeed, not compete with you.",
+                "It's okay to outgrow people who don't support your growth.",
+                "Social skills get better with practice, just like any other skill."
+            ],
+            growth: [
+                "Mistakes don't make you a failure. They make you experienced.",
+                "Your current situation is not your final destination.",
+                "Growth happens outside your comfort zone, but so does anxiety. Take it one step at a time.",
+                "You're allowed to change your mind, your goals, and your path. That's called growing up.",
+                "Progress isn't always visible, but it's always happening when you keep trying."
+            ],
+            reality: [
+                "High school drama feels huge now, but it won't matter in five years.",
+                "Social media shows highlights, not reality. Everyone has struggles they don't post about.",
+                "Your parents are figuring it out too. They don't have all the answers.",
+                "College isn't the only path to success. Trade schools, entrepreneurship, and gap years are all valid.",
+                "Mental health struggles are common and treatable. Getting help is a sign of strength, not weakness."
+            ],
+            future: [
+                "Your teenage years don't define your entire life. You have so much time to become who you want to be.",
+                "The skills you're building now - resilience, communication, self-awareness - will serve you forever.",
+                "Your future is full of possibilities you can't even imagine yet.",
+                "Every adult was once a confused teenager. You're not behind, you're right on time.",
+                "The world needs what you have to offer, even if you don't know what that is yet."
+            ]
+        };
+
+        // Scenarios database
+        const scenarios = [
+            {
+                title: "Asking Someone Out",
+                context: "You want to ask your crush to hang out this weekend. You're texting them now.",
+                responses: [
+                    { text: "hey... um... maybe we could hang out? if you want... no pressure though...", correct: false, feedback: "This sounds uncertain and apologetic. Confidence is attractive!" },
+                    { text: "Hey! Want to grab some food or see a movie this weekend?", correct: true, feedback: "Perfect! Direct, confident, and gives clear options. This shows you value your time and theirs." },
+                    { text: "WE SHOULD DEFINITELY HANG OUT THIS WEEKEND IT WOULD BE SO AMAZING", correct: false, feedback: "Too intense! This might overwhelm them. Tone it down a bit." }
+                ]
+            },
+            {
+                title: "Setting Boundaries with Parents",
+                context: "Your parents want to check your phone every day. You want more privacy as you get older.",
+                responses: [
+                    { text: "You don't trust me at all! This is so unfair!", correct: false, feedback: "This sounds defensive and will likely escalate the situation." },
+                    { text: "I understand you want me to be safe. Can we talk about earning more privacy as I get older?", correct: true, feedback: "Great approach! You acknowledge their concerns while expressing your needs maturely." },
+                    { text: "Whatever, I'll just delete everything before you check anyway.", correct: false, feedback: "This is passive-aggressive and breaks trust. Not a healthy solution." }
+                ]
+            },
+            {
+                title: "Handling Peer Pressure",
+                context: "Your friends are pressuring you to skip class to hang out at the mall.",
+                responses: [
+                    { text: "I can't, my parents will kill me if they find out.", correct: false, feedback: "While honest, this makes it about fear rather than your own values." },
+                    { text: "Nah, I'm good. I don't want to risk getting in trouble. Have fun though!", correct: true, feedback: "Perfect! You're standing by your values while staying friendly and not judging them." },
+                    { text: "Fine, but if we get caught, I'm blaming you guys.", correct: false, feedback: "This shows you're going against your better judgment and already planning to throw them under the bus." }
+                ]
+            }
+        ];
+
+        // AI Personalities
+        const personalities = {
+            homie: {
+                name: "Homie",
+                emoji: "😎",
+                style: "casual, supportive bestie",
+                responses: [
+                    "Yo, I totally get that feeling. Want to talk through what's going on?",
+                    "Nah fam, that sounds rough. But you're stronger than you think, for real.",
+                    "Honestly? That's a totally normal thing to worry about. You're not weird for feeling that way.",
+                    "I see you trying to figure this out. That takes guts, not gonna lie.",
+                    "Real talk - you've got this. And if you don't right now, that's cool too. We'll figure it out together."
+                ]
+            },
+            bigbro: {
+                name: "Big Bro",
+                emoji: "💪",
+                style: "protective, encouraging",
+                responses: [
+                    "Hey, first thing - you're gonna be alright. I've got your back on this.",
+                    "Listen, I know it seems big right now, but you're tougher than this situation.",
+                    "You know what? I'm proud of you for even thinking about this stuff. Shows maturity.",
+                    "Let me tell you something - everyone feels like this sometimes. You're not alone.",
+                    "Here's what we're gonna do - take this one step at a time. No rushing, no pressure."
+                ]
+            },
+            unk: {
+                name: "Unk",
+                emoji: "🤓",
+                style: "wise, thoughtful uncle",
+                responses: [
+                    "You know, when I was your age, I felt the exact same way about things like this.",
+                    "Here's something I learned - other people's opinions of you are none of your business.",
+                    "Life has a funny way of working out, even when it doesn't feel like it will.",
+                    "The skills you're building by dealing with this? They're gonna serve you well later.",
+                    "Sometimes the best thing you can do is just be kind to yourself while you figure it out."
+                ]
+            },
+            og: {
+                name: "OG",
+                emoji: "👑",
+                style: "experienced, straight-talking",
+                responses: [
+                    "Real recognize real - and you're being real about your struggles. Respect.",
+                    "Look, I've been where you are. It gets better, but you gotta do the work.",
+                    "You're asking the right questions. That already puts you ahead of most people.",
+                    "Life's gonna test you. But every challenge is building character and strength.",
+                    "You got more power than you think. Sometimes you just gotta tap into it."
+                ]
+            }
+        };
+
+        // Authentication Functions
+        function showAuthTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.auth-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Show/hide forms
+            if (tab === 'login') {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('registerForm').style.display = 'none';
+            } else {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+            }
+
+            // Clear errors
+            document.getElementById('loginError').style.display = 'none';
+            document.getElementById('registerError').style.display = 'none';
+        }
+
+        function register() {
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorDiv = document.getElementById('registerError');
+
+            // Validation
+            if (!username || !password || !confirmPassword) {
+                showError(errorDiv, 'Please fill in all fields');
+                return;
+            }
+
+            if (username.length < 3) {
+                showError(errorDiv, 'Username must be at least 3 characters long');
+                return;
+            }
+
+            if (password.length < 8) {
+                showError(errorDiv, 'Password must be at least 8 characters long');
+                return;
+            }
+
+            if (!/(?=.*[a-zA-Z])(?=.*\d)/.test(password)) {
+                showError(errorDiv, 'Password must contain both letters and numbers');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError(errorDiv, 'Passwords do not match');
+                return;
+            }
+
+            if (userDatabase[username]) {
+                showError(errorDiv, 'Username already exists. Please choose another.');
+                return;
+            }
+
+            // Create user account
+            userDatabase[username] = {
+                password: password, // In production, this would be hashed
+                dateCreated: new Date().toISOString(),
+                totalDonations: 0,
+                isSupporter: false
+            };
+
+            // Save to localStorage
+            localStorage.setItem('factsonly_users', JSON.stringify(userDatabase));
+            
+            console.log('User registered:', username);
+            
+            // Auto-login after registration
+            currentUser = username;
+            localStorage.setItem('factsonly_current_user', username);
+            
+            showApp();
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('loginError');
+
+            if (!username || !password) {
+                showError(errorDiv, 'Please enter both username and password');
+                return;
+            }
+
+            if (!userDatabase[username]) {
+                showError(errorDiv, 'Username not found. Please check your username or sign up.');
+                return;
+            }
+
+            if (userDatabase[username].password !== password) {
+                showError(errorDiv, 'Incorrect password. Please try again.');
+                return;
+            }
+
+            // Login successful
+            currentUser = username;
+            localStorage.setItem('factsonly_current_user', username);
+            
+            console.log('User logged in:', username);
+            showApp();
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('factsonly_current_user');
+            
+            // Hide app screens and show auth
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+                screen.style.display = 'none';
+            });
+            
+            document.getElementById('authScreen').style.display = 'flex';
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+            
+            console.log('User logged out');
+        }
+
+        function showError(errorDiv, message) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function showApp() {
+            // Hide auth screen
+            document.getElementById('authScreen').style.display = 'none';
+            
+            // Show user info
+            document.getElementById('userInfo').style.display = 'block';
+            document.getElementById('logoutBtn').style.display = 'block';
+            document.getElementById('currentUsername').textContent = currentUser;
+            
+            // Check if user is onboarded
+            const onboarded = localStorage.getItem(`factsonly_onboarded_${currentUser}`);
+            if (onboarded) {
+                navigateToScreen('facts', 0);
+            } else {
+                document.getElementById('onboarding').classList.add('active');
+                document.getElementById('onboarding').style.display = 'block';
+            }
+            
+            // Load user's supporter status
+            updateSupporterStatus();
+            loadSupportersList();
+        }
+
+        // Donation Functions
+        function processDonation() {
+            const name = document.getElementById('donorName').value.trim();
+            const email = document.getElementById('donorEmail').value.trim();
+            const amount = parseFloat(document.getElementById('donationAmount').value);
+            const message = document.getElementById('donationMessage').value.trim();
+
+            if (!name || !amount || amount < 1) {
+                alert('Please enter your name and a valid donation amount.');
+                return;
+            }
+
+            // Create donation record
+            const donation = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                amount: amount,
+                message: message,
+                date: new Date().toISOString(),
+                username: currentUser
+            };
+
+            // Add to donations database
+            donationsDatabase.unshift(donation);
+            localStorage.setItem('factsonly_donations', JSON.stringify(donationsDatabase));
+
+            // Update user's total donations
+            if (userDatabase[currentUser]) {
+                userDatabase[currentUser].totalDonations += amount;
+                if (userDatabase[currentUser].totalDonations >= 20) {
+                    userDatabase[currentUser].isSupporter = true;
+                }
+                localStorage.setItem('factsonly_users', JSON.stringify(userDatabase));
+            }
+
+            // Clear form
+            document.getElementById('donorName').value = '';
+            document.getElementById('donorEmail').value = '';
+            document.getElementById('donationAmount').value = '';
+            document.getElementById('donationMessage').value = '';
+
+            // Show success
+            alert(`Thank you ${name} for your $${amount} donation! 💝 Your support helps keep Facts Only free for all teens.`);
+            
+            // Update UI
+            updateSupporterStatus();
+            loadSupportersList();
+            
+            console.log('Donation processed:', donation);
+        }
+
+        function updateSupporterStatus() {
+            const supporterBadge = document.getElementById('supporterBadge');
+            if (currentUser && userDatabase[currentUser] && userDatabase[currentUser].isSupporter) {
+                supporterBadge.style.display = 'inline-block';
+            } else {
+                supporterBadge.style.display = 'none';
+            }
+        }
+
+        function loadSupportersList() {
+            const supporters = donationsDatabase.filter(d => d.amount >= 20);
+            const supportersList = document.getElementById('supportersList');
+            const supportersContent = document.getElementById('supportersContent');
+
+            if (supporters.length === 0) {
+                supportersList.style.display = 'none';
+                return;
+            }
+
+            supportersList.style.display = 'block';
+            
+            // Group by name and sum donations
+            const supporterTotals = {};
+            supporters.forEach(donation => {
+                if (!supporterTotals[donation.name]) {
+                    supporterTotals[donation.name] = {
+                        name: donation.name,
+                        total: 0,
+                        message: donation.message
+                    };
+                }
+                supporterTotals[donation.name].total += donation.amount;
+            });
+
+            // Sort by total amount
+            const sortedSupporters = Object.values(supporterTotals)
+                .sort((a, b) => b.total - a.total)
+                .slice(0, 10); // Show top 10
+
+            supportersContent.innerHTML = sortedSupporters.map(supporter => `
+                <div class="supporter-item">
+                    <div>
+                        <strong>${supporter.name}</strong>
+                        ${supporter.message ? `<br><small style="color: #666;">"${supporter.message}"</small>` : ''}
+                    </div>
+                    <div style="font-weight: bold; color: #667eea;">$${supporter.total}</div>
+                </div>
+            `).join('');
+        }
+
+        // Core App Functions
+        function completeOnboarding() {
+            console.log("Completing onboarding...");
+            localStorage.setItem(`factsonly_onboarded_${currentUser}`, 'true');
+            navigateToScreen('facts', 0);
+        }
+
+        function navigateToScreen(screenName, navIndex) {
+            console.log(`Navigating to screen: ${screenName}, index: ${navIndex}`);
+            
+            // Force hide all screens first
+            const allScreens = document.querySelectorAll('.screen');
+            console.log(`Found ${allScreens.length} screens`);
+            
+            allScreens.forEach((screen, index) => {
+                screen.classList.remove('active');
+                screen.style.display = 'none';
+                console.log(`Hidden screen ${index}: ${screen.id}`);
+            });
+            
+            // Show selected screen
+            const targetScreen = document.getElementById(screenName);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                targetScreen.style.display = 'block';
+                console.log(`Screen ${screenName} is now active and visible`);
+            } else {
+                console.error(`Screen ${screenName} not found`);
+                return;
+            }
+            
+            // Update navigation
+            const allNavItems = document.querySelectorAll('.nav-item');
+            allNavItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (typeof navIndex === 'number' && allNavItems[navIndex]) {
+                allNavItems[navIndex].classList.add('active');
+                console.log(`Nav item ${navIndex} is now active`);
+            }
+            
+            currentScreen = screenName;
+        }
+
+        function selectMoodEmoji(emoji, feeling) {
+            console.log(`Selected mood: ${emoji} (${feeling})`);
+            selectedMood = { emoji, feeling };
+            
+            // Update UI
+            document.querySelectorAll('.mood-button').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Find the clicked button and select it
+            const buttons = document.querySelectorAll('.mood-button');
+            buttons.forEach(btn => {
+                if (btn.textContent === emoji) {
+                    btn.classList.add('selected');
+                }
+            });
+            
+            // Save mood data
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem(`mood_${currentUser}_${today}`, JSON.stringify(selectedMood));
+            
+            // Show personalized fact based on mood
+            showPersonalizedFactFromEmoji(feeling);
+        }
+
+        function showPersonalizedFactFromEmoji(feeling) {
+            let fact;
+            const factElement = document.getElementById('dailyFact');
+            
+            if (['terrible', 'very sad', 'sad'].includes(feeling)) {
+                // Low mood - encouraging facts
+                fact = facts.selfWorth[Math.floor(Math.random() * facts.selfWorth.length)];
+            } else if (['okay', 'good'].includes(feeling)) {
+                // Medium mood - growth oriented
+                fact = facts.growth[Math.floor(Math.random() * facts.growth.length)];
+            } else {
+                // High mood - maintain momentum
+                fact = facts.future[Math.floor(Math.random() * facts.future.length)];
+            }
+            
+            factElement.textContent = fact;
+        }
+
+        function saveJournalEntry() {
+            const entryText = document.getElementById('journalEntry').value.trim();
+            if (!entryText) {
+                alert('Please write something in your journal first!');
+                return;
+            }
+
+            const entry = {
+                date: new Date().toISOString(),
+                mood: selectedMood,
+                content: entryText,
+                id: Date.now(),
+                username: currentUser
+            };
+
+            // Get existing entries for current user
+            const existingEntries = JSON.parse(localStorage.getItem(`journal_entries_${currentUser}`) || '[]');
+            existingEntries.unshift(entry); // Add to beginning
+            
+            // Keep only last 100 entries
+            if (existingEntries.length > 100) {
+                existingEntries.splice(100);
+            }
+
+            // Save to localStorage
+            localStorage.setItem(`journal_entries_${currentUser}`, JSON.stringify(existingEntries));
+
+            // Clear the text area
+            document.getElementById('journalEntry').value = '';
+
+            // Show success message
+            alert('Journal entry saved! 💾');
+            console.log('Journal entry saved:', entry);
+        }
+
+        function viewJournalHistory() {
+            const entries = JSON.parse(localStorage.getItem(`journal_entries_${currentUser}`) || '[]');
+            const modal = document.getElementById('journalHistoryModal');
+            const content = document.getElementById('journalHistoryContent');
+
+            if (entries.length === 0) {
+                content.innerHTML = '<p style="color: #666; text-align: center; margin: 40px 0;">No journal entries yet. Start writing to see your entries here!</p>';
+            } else {
+                content.innerHTML = entries.map(entry => {
+                    const date = new Date(entry.date).toLocaleDateString();
+                    const mood = entry.mood ? `${entry.mood.emoji} ${entry.mood.feeling}` : '';
+                    return `
+                        <div style="border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <small style="color: #666; font-weight: bold;">${date}</small>
+                                <span style="font-size: 14px;">${mood}</span>
+                            </div>
+                            <p style="line-height: 1.5; color: #333;">${entry.content}</p>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeJournalHistory() {
+            document.getElementById('journalHistoryModal').classList.remove('show');
+        }
+
+        function showImmediateHelp() {
+            console.log("Showing immediate help resources...");
+            document.getElementById('immediateHelpModal').classList.add('show');
+        }
+
+        function closeImmediateHelp() {
+            console.log("Closing immediate help...");
+            document.getElementById('immediateHelpModal').classList.remove('show');
+        }
+
+        function getNewFact() {
+            console.log("Getting new fact...");
+            const categories = Object.keys(facts);
+            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+            const randomFact = facts[randomCategory][Math.floor(Math.random() * facts[randomCategory].length)];
+            
+            document.getElementById('dailyFact').textContent = randomFact;
+            
+            // Update stats
+            userProgress.factsRead++;
+            updateProgressDisplay();
+        }
+
+        function selectResponse(element, isCorrect, responseIndex) {
+            console.log(`Selected response: ${responseIndex}, correct: ${isCorrect}`);
+            
+            // Clear previous selections
+            document.querySelectorAll('.response-option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selection
+            element.classList.add('selected');
+            
+            // Show feedback after a delay
+            setTimeout(() => {
+                const feedback = document.getElementById('feedback');
+                const allOptions = document.querySelectorAll('.response-option');
+                
+                allOptions.forEach((option, index) => {
+                    if (scenarios[currentScenarioIndex].responses[index].correct) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                    }
+                });
+                
+                feedback.innerHTML = scenarios[currentScenarioIndex].responses[responseIndex].feedback;
+                feedback.style.display = 'block';
+                feedback.style.background = isCorrect ? '#d4edda' : '#f8d7da';
+                feedback.style.color = isCorrect ? '#155724' : '#721c24';
+                
+                if (isCorrect) {
+                    userProgress.totalXP += 10;
+                    userProgress.scenariosCompleted++;
+                    updateProgressDisplay();
+                }
+            }, 500);
+        }
+
+        function nextScenario() {
+            console.log("Loading next scenario...");
+            currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length;
+            const scenario = scenarios[currentScenarioIndex];
+            
+            document.querySelector('.scenario-title').textContent = `Practice Scenario: ${scenario.title}`;
+            document.querySelector('.scenario-context').textContent = scenario.context;
+            
+            const responsesList = document.querySelector('.response-options');
+            responsesList.innerHTML = '';
+            
+            scenario.responses.forEach((response, index) => {
+                const li = document.createElement('li');
+                li.className = 'response-option';
+                li.textContent = response.text;
+                li.onclick = () => selectResponse(li, response.correct, index);
+                responsesList.appendChild(li);
+            });
+            
+            document.getElementById('feedback').style.display = 'none';
+        }
+
+        function selectPersonality(personality, cardIndex) {
+            console.log(`Selected personality: ${personality}`);
+            currentPersonality = personality;
+            
+            // Update UI
+            document.querySelectorAll('.personality-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            const cards = document.querySelectorAll('.personality-card');
+            if (cards[cardIndex]) {
+                cards[cardIndex].classList.add('active');
+            }
+            
+            // Add personality greeting
+            const chatContainer = document.getElementById('chatContainer');
+            const greeting = personalities[personality].responses[Math.floor(Math.random() * personalities[personality].responses.length)];
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message ai';
+            messageDiv.innerHTML = `<div class="message-bubble ai">${greeting}</div>`;
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            console.log(`Sending message: ${message}`);
+            const chatContainer = document.getElementById('chatContainer');
+            
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-message user';
+            userDiv.innerHTML = `<div class="message-bubble user">${message}</div>`;
+            chatContainer.appendChild(userDiv);
+            
+            // Clear input
+            input.value = '';
+            
+            // Add AI response after delay
+            setTimeout(() => {
+                const aiResponse = personalities[currentPersonality].responses[Math.floor(Math.random() * personalities[currentPersonality].responses.length)];
+                
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'chat-message ai';
+                aiDiv.innerHTML = `<div class="message-bubble ai">${aiResponse}</div>`;
+                chatContainer.appendChild(aiDiv);
+                
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+            
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function updateProgressDisplay() {
+            console.log("Updating progress display...");
+            document.getElementById('streakStat').textContent = userProgress.streak;
+            document.getElementById('scenariosStat').textContent = userProgress.scenariosCompleted;
+            document.getElementById('xpStat').textContent = userProgress.totalXP;
+            document.getElementById('factsStat').textContent = userProgress.factsRead;
+        }
+
+        function exportProgress() {
+            console.log("Exporting progress...");
+            const data = {
+                username: currentUser,
+                progress: userProgress,
+                dateExported: new Date().toISOString(),
+                app: 'Facts Only'
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `factsonly_progress_${currentUser}.json`;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+        }
+
+        function showEmergencyHelp() {
+            console.log("Showing emergency help...");
+            document.getElementById('emergencyModal').classList.add('show');
+        }
+
+        function closeEmergencyHelp() {
+            console.log("Closing emergency help...");
+            document.getElementById('emergencyModal').classList.remove('show');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded, initializing app...");
+            
+            // Check if user is already logged in
+            const savedUser = localStorage.getItem('factsonly_current_user');
+            if (savedUser && userDatabase[savedUser]) {
+                currentUser = savedUser;
+                showApp();
+            } else {
+                // Show auth screen
+                document.getElementById('authScreen').style.display = 'flex';
+            }
+            
+            // Set initial fact
+            getNewFact();
+            
+            // Load saved progress for current user
+            if (currentUser) {
+                const savedProgress = localStorage.getItem(`factsonly_progress_${currentUser}`);
+                if (savedProgress) {
+                    userProgress = { ...userProgress, ...JSON.parse(savedProgress) };
+                    updateProgressDisplay();
+                }
+            }
+            
+            console.log("App initialized successfully!");
+        });
+
+        // Auto-save progress periodically
+        setInterval(() => {
+            if (currentUser) {
+                localStorage.setItem(`factsonly_progress_${currentUser}`, JSON.stringify(userProgress));
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
